@@ -11,4 +11,4 @@ $TTL	86400
 ;
 	IN	NS	ns1.myapp.com.
 ns1	IN	A	255.0.255.0
-www	IN	A	1.2.3.4
+www	IN	A	127.0.0.1
