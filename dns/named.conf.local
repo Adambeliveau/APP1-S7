@@ -1,0 +1,6 @@
+  zone "myapp.com" {
+      type primary;
+      file "/etc/bind/myapp.com";
+      dnssec-policy default;
+      inline-signing yes;
+  };
