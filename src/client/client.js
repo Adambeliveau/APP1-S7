@@ -18,10 +18,10 @@ const options = {
     port: 8081,
     path: '/',
     method: 'GET',
-    // key: fs.readFileSync('client-key.pem'),
-    // cert: fs.readFileSync('client-cert.pem'),
-    // ca: fs.readFileSync('ca-cert.pem'),
-    rejectUnauthorized: false
+    key: fs.readFileSync(__dirname + '/../../cert/client/client-key.pem'),
+    cert: fs.readFileSync(__dirname + '/../../cert/client/client-cert.pem'),
+    rejectUnauthorized: false,
+    passphrase: 'gei761'
 };
 
 https.get(options, (res) => {
