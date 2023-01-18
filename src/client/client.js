@@ -17,14 +17,14 @@ const options = {
     hostname: address,
     port: 8081,
     path: '/',
-    method: 'GET',
+    method: 'POST',
     key: fs.readFileSync(__dirname + '/../../cert/client/client-key.pem'),
     cert: fs.readFileSync(__dirname + '/../../cert/client/client-cert.pem'),
     rejectUnauthorized: false,
-    passphrase: 'gei761'
+    passphrase: 'gei761',
 };
 
-https.get(options, (res) => {
+const req = https.request(options, (res) => {
     console.log(`STATUS: ${res.statusCode}`);
     console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
     res.setEncoding('utf8');
@@ -34,5 +34,8 @@ https.get(options, (res) => {
     res.on('end', () => {
         console.log('No more data in response.');
     });
-});
+})
+
+req.write(JSON.stringify({username: 'user1234', password: 'password1234'}));
+req.end();
 
