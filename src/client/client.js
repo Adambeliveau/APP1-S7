@@ -1,4 +1,5 @@
-const http = require('http');
+const https = require('https');
+const fs = require('fs');
 const { Resolver } = require('node:dns');
 
 const hostname = 'www.myapp.com';
@@ -14,12 +15,16 @@ resolver.resolve4(hostname, (err, addresses) => {
 
 const options = {
     hostname: address,
-    port: 8080,
+    port: 8081,
     path: '/',
     method: 'GET',
+    // key: fs.readFileSync('client-key.pem'),
+    // cert: fs.readFileSync('client-cert.pem'),
+    // ca: fs.readFileSync('ca-cert.pem'),
+    rejectUnauthorized: false
 };
 
-http.get(options, (res) => {
+https.get(options, (res) => {
     console.log(`STATUS: ${res.statusCode}`);
     console.log(`HEADERS: ${JSON.stringify(res.headers)}`);
     res.setEncoding('utf8');
@@ -30,3 +35,4 @@ http.get(options, (res) => {
         console.log('No more data in response.');
     });
 });
+
