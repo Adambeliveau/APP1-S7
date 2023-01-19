@@ -1,7 +1,5 @@
-const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const { resolve } = require('path');
 
 const options = {
     key: fs.readFileSync(__dirname + '/../../cert/server/server-key.pem'),
@@ -12,12 +10,6 @@ const options = {
     passphrase: 'gei761',
     ciphers: 'TLS_AES_128_CCM_SHA256:TLS_AES_128_GCM_SHA256',
 };
-
-http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('Hello Http');
-}
-).listen(8080);
 
 const dbEntries = fs.readFileSync(__dirname + '/db.txt', 'utf8').split('\n')
 let usernames = [];

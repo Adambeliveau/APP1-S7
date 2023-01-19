@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-const { Resolver } = require('node:dns');
+const { Resolver } = require('dns');
 
 const hostname = 'www.myapp.com';
 const resolver = new Resolver();
