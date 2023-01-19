@@ -9,7 +9,8 @@ const options = {
     ca: fs.readFileSync(__dirname + '/../../autorite/autorite.cer'),
     requestCert: true,
     rejectUnauthorized: false,
-    passphrase: 'gei761'
+    passphrase: 'gei761',
+    ciphers: 'TLS_AES_128_CCM_SHA256:TLS_AES_128_GCM_SHA256',
 };
 
 http.createServer((req, res) => {
@@ -26,7 +27,6 @@ dbEntries.forEach(entry => {
     usernames.push(username)
     passwords.push(password)
 });
-console.log(usernames, passwords)
 
 https.createServer(options, (req, res) => {
     let body = '';
@@ -37,17 +37,19 @@ https.createServer(options, (req, res) => {
         body = JSON.parse(body);
         if (!login(body)) {
             res.writeHead(401);
-            return res.end('Login unsuccessful');
+            return res.end('Login unsuccessful. Username or password incorrect.');
         }
         if (!req.client.authorized) {
             res.writeHead(401);
             return res.end('Invalid client certificate authentication.');
         }
         res.writeHead(200);
-        return res.end('login successful and done over https');
+        return res.end(`login successful with ${body.username} and done over https`);
     });
 }
-).listen(8081);
+).listen(8081, () => {
+    console.log('Server listening on port 8081');
+});
 
 const login = (body) => {
     const match = usernames.find((username , i) => {
