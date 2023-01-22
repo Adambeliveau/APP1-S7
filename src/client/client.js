@@ -25,7 +25,7 @@ const options = {
     cert: fs.readFileSync(__dirname + '/../../cert/client/client-cert.pem'),
     rejectUnauthorized: false,
     passphrase: 'gei761',
-    ciphers: 'TLS_AES_128_CCM_SHA256',
+    ciphers: 'TLS_AES_256_GCM_SHA384',
 };
 
 const req = https.request(options, (res) => {
@@ -37,4 +37,3 @@ const req = https.request(options, (res) => {
 });
 req.write(JSON.stringify({username: 'user1234', password: 'password1234'}));
 req.end();
-

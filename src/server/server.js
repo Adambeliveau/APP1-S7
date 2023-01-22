@@ -8,7 +8,7 @@ const options = {
     requestCert: true,
     rejectUnauthorized: false,
     passphrase: 'gei761',
-    ciphers: 'TLS_AES_128_CCM_SHA256:TLS_AES_128_GCM_SHA256',
+    ciphers: 'TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:TLS_AES_256_GCM_SHA384',
 };
 
 const dbEntries = fs.readFileSync(__dirname + '/db.txt', 'utf8').split('\n')
